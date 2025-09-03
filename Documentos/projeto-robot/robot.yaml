@@ -1,0 +1,15 @@
+test:
+  - tests/
+
+output:
+  - results/
+
+variable:
+  - BASE_URL:https://restful-booker.herokuapp.com
+
+include:
+  - happy_path
+  - negative_path
+
+exclude:
+  - skip
