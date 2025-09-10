@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.10 on win32)" generated="2025-09-10T16:57:37.597110" rpa="false" schemaversion="5">
+<suite id="s1" name="Serverest Tests" source="C:\Users\kaiol\challenge03\serverest_tests.robot">
+<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
+<msg time="2025-09-10T16:57:37.689464" level="INFO">Creating Session using : alias=serverest, url=https://compassuol.serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>serverest</arg>
+<arg>https://compassuol.serverest.dev</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-10T16:57:37.689464" elapsed="0.000000"/>
+</kw>
+<test id="s1-t1" name="Login com credenciais válidas" line="16">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-10T16:57:37.690463" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<arg>password=${SENHA}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-10T16:57:37.690463" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:38.209169" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com", "password": "teste"}' 
+ </msg>
+<msg time="2025-09-10T16:57:38.209169" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'c35847208d6229d1d208a5654e3b5611;o=1', 'date': 'Wed, 10 Sep 2025 19:57:38 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NTM0MjU4LCJleHAiOjE3NTc1MzQ4NTh9.NJE3GfHKDXvgSL9ZdZW7YmPmW_vn2xO1HOh1M0S2Y5A"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:38.210170" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:37.690463" elapsed="0.519707"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.210170" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-09-10T16:57:38.210955" level="INFO">${token} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzU3NTM0MjU4LCJleHAiOjE3NTc1MzQ4NTh9.NJE3GfHKDXvgSL9ZdZW7YmPmW_vn2xO1HOh1M0S2Y5A</msg>
+<var>${token}</var>
+<arg>${resp.json()}</arg>
+<arg>authorization</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.210170" elapsed="0.000785"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-09-10T16:57:38.210955" level="INFO">Length is 192.</msg>
+<arg>${token}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.210955" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:37.689464" elapsed="0.521491"/>
+</test>
+<test id="s1-t2" name="Login com email inválido" line="24">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-10T16:57:38.211948" level="INFO">${body} = {'email': 'emailinvalido.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>email=${EMAILINVALIDO}</arg>
+<arg>password=${SENHA}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.211948" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:38.381908" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"email": "emailinvalido.com", "password": "teste"}' 
+ </msg>
+<msg time="2025-09-10T16:57:38.381908" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '8df61aa648e57432d208a5654e3b52b8', 'date': 'Wed, 10 Sep 2025 19:57:38 GMT', 'server': 'Google Frontend', 'Content-Length': '50'} 
+ body={
+    "email": "email deve ser um email válido"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:38.381908" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.211948" elapsed="0.169960"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.381908" elapsed="0.000999"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${resp.json()['email']}</arg>
+<arg>deve ser um email válido</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.382907" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:38.211948" elapsed="0.170959"/>
+</test>
+<test id="s1-t3" name="Login com senha incorreta" line="30">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-10T16:57:38.383906" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'senhaerrada'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<arg>password=${SENHA_INCORRETA}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.383906" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:38.557249" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '53', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com", "password": "senhaerrada"}' 
+ </msg>
+<msg time="2025-09-10T16:57:38.557249" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=401, reason=Unauthorized 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'f3a78df0556d66b8d208a5654e3b574b', 'date': 'Wed, 10 Sep 2025 19:57:38 GMT', 'server': 'Google Frontend', 'Content-Length': '48'} 
+ body={
+    "message": "Email e/ou senha inválidos"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:38.557249" level="INFO">${resp} = &lt;Response [401]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=401</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.383906" elapsed="0.173343"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>401</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.557249" elapsed="0.001001"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp.json()['message']}</arg>
+<arg>Email e/ou senha inválidos</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.558250" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:38.383906" elapsed="0.174344"/>
+</test>
+<test id="s1-t4" name="Login com email inexistente" line="36">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-10T16:57:38.559248" level="INFO">${body} = {'email': 'inexistente@teste.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL_INEXISTENTE}</arg>
+<arg>password=${SENHA}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.559248" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:38.726955" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '55', 'Content-Type': 'application/json'} 
+ body=b'{"email": "inexistente@teste.com", "password": "teste"}' 
+ </msg>
+<msg time="2025-09-10T16:57:38.726955" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=401, reason=Unauthorized 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '0b523b9df153f6f4d208a5654e3b5947', 'date': 'Wed, 10 Sep 2025 19:57:38 GMT', 'server': 'Google Frontend', 'Content-Length': '48'} 
+ body={
+    "message": "Email e/ou senha inválidos"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:38.726955" level="INFO">${resp} = &lt;Response [401]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=401</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.559248" elapsed="0.167707"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>401</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.726955" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp.json()['message']}</arg>
+<arg>Email e/ou senha inválidos</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.727957" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:38.559248" elapsed="0.168709"/>
+</test>
+<test id="s1-t5" name="Login sem email" line="42">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-10T16:57:38.728958" level="INFO">${body} = {'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>password=${SENHA}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.728958" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:38.893534" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '21', 'Content-Type': 'application/json'} 
+ body=b'{"password": "teste"}' 
+ </msg>
+<msg time="2025-09-10T16:57:38.893534" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'db1a97278b1ea8ecd208a5654e3b5db3', 'date': 'Wed, 10 Sep 2025 19:57:38 GMT', 'server': 'Google Frontend', 'Content-Length': '40'} 
+ body={
+    "email": "email é obrigatório"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:38.893534" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.728958" elapsed="0.164576"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.894534" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp.json()['email']}</arg>
+<arg>email é obrigatório</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.894534" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:38.728958" elapsed="0.165576"/>
+</test>
+<test id="s1-t6" name="Login sem senha" line="48">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-10T16:57:38.895534" level="INFO">${body} = {'email': 'fulano@qa.com'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.895534" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:39.082257" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '26', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com"}' 
+ </msg>
+<msg time="2025-09-10T16:57:39.082257" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '030824329005e5ebd208a5654e3b56b1', 'date': 'Wed, 10 Sep 2025 19:57:39 GMT', 'server': 'Google Frontend', 'Content-Length': '46'} 
+ body={
+    "password": "password é obrigatório"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:39.082257" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:38.895534" elapsed="0.186723"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.083257" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp.json()['password']}</arg>
+<arg>password é obrigatório</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.083257" elapsed="0.001000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:38.895534" elapsed="0.188723"/>
+</test>
+<test id="s1-t7" name="Listar usuários" line="55">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:39.278819" level="INFO">GET Request : url=https://compassuol.serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-10T16:57:39.278819" level="INFO">GET Response : url=https://compassuol.serverest.dev/usuarios 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '1ffb5d03a8509cb6d208a5654e3b585f', 'date': 'Wed, 10 Sep 2025 19:57:39 GMT', 'server': 'Google Frontend', 'Content-Length': '6871'} 
+ body={
+    "quantidade": 33,
+    "usuarios": [
+        {
+            "nome": "TesteRobot",
+            "email": "EUDcmo@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "09HDCAl29yel8QMs"
+        },
+        {
+            "nome": "Fulano da Silva",
+            "email": "fulano@qa.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz1"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=GNOeGQ@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "1BYbeqxbPRSrB7DN"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=Vtwadi@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "3MjtOv72t3ogVXnY"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "SBHbno@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "6TSzgd5H4cj3B4Aa"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "HbTOTy@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "958aaC6ilp5LYPLr"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "uHvvuq@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "CNNEcQrmanxkPYCg"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "BVRunt@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "Fu2wW2De4nQVoUDe"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=BUZGpL@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "HSDTA87NYc1ItlV5"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=VPrzWe@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "IU0u6N6NkHhDpP9y"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=SndsbH@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "J8uxz99w48zvymDn"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=xgCBsr@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "JqMJadqrBXEp7473"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=FCWgVI@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "Kqr4IIN1Mg0RkIBu"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=TBPMNu@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "NWseXCLCJ9dL95d3"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=kCMNrS@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "RrCbVyZOlVRJXHjA"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=gKxXYb@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "TC6sKsPZlu9lUirf"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "rpnyyE@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "XNRFnwuWpSXZcm4g"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=asKBlD@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "g0eQGvZSyPIpIW6v"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=jIQIEH@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "ggSyCr6QNJfdeW06"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "GUqhyo@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "hUpnagEoUJ9AC8AU"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "qxbxqT@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "isW6G7xpHkdrDZGP"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "LxAmmE@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "jIHs6KmsXAQFH1Iz"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=IalJcv@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "kirASE70GK8kfFB2"
+        },
+        {
+            "nome": "Teste Usuário Comum",
+            "email": "usuarioteste@teste.com",
+            "password": "teste",
+            "administrador": "false",
+            "_id": "msKMX9frYyx7TeHh"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "BdtGGM@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "oGKejYiRWsgzGaxC"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "MnbOKH@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "osWcSaQLKCS0389O"
+        },
+        {
+            "nome": "Teste Usuário Adm",
+            "email": "usuarioadm@teste.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "pL0fqwXiXU5pwV7H"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "ENKxVv@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "qUcPZeGAlxZoKoCo"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=EjYJBa@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "rYFWjcyog2HOVfE9"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=unaMdd@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "s0mShP4FBTSKFLjj"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "gMQrAg@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "trbh76FvHJRmvv5x"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "bEadpM@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "y26PV5xmgStF3uU1"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "LiVGBd@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "ySYJxquJWD3CKSvA"
+        }
+    ]
+} 
+ </msg>
+<msg time="2025-09-10T16:57:39.278819" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.084257" elapsed="0.194562"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.278819" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${resp.json()}</arg>
+<arg>usuarios</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.279832" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${resp.json()}</arg>
+<arg>quantidade</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.279832" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:39.084257" elapsed="0.196573"/>
+</test>
+<test id="s1-t8" name="Buscar usuário por ID válido" line="61">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:39.489904" level="INFO">GET Request : url=https://compassuol.serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-10T16:57:39.489904" level="INFO">GET Response : url=https://compassuol.serverest.dev/usuarios 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '563481f852a54286d208a5654e3b5b45', 'date': 'Wed, 10 Sep 2025 19:57:39 GMT', 'server': 'Google Frontend', 'Content-Length': '6871'} 
+ body={
+    "quantidade": 33,
+    "usuarios": [
+        {
+            "nome": "TesteRobot",
+            "email": "EUDcmo@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "09HDCAl29yel8QMs"
+        },
+        {
+            "nome": "Fulano da Silva",
+            "email": "fulano@qa.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz1"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=GNOeGQ@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "1BYbeqxbPRSrB7DN"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=Vtwadi@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "3MjtOv72t3ogVXnY"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "SBHbno@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "6TSzgd5H4cj3B4Aa"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "HbTOTy@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "958aaC6ilp5LYPLr"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "uHvvuq@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "CNNEcQrmanxkPYCg"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "BVRunt@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "Fu2wW2De4nQVoUDe"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=BUZGpL@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "HSDTA87NYc1ItlV5"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=VPrzWe@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "IU0u6N6NkHhDpP9y"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=SndsbH@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "J8uxz99w48zvymDn"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=xgCBsr@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "JqMJadqrBXEp7473"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=FCWgVI@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "Kqr4IIN1Mg0RkIBu"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=TBPMNu@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "NWseXCLCJ9dL95d3"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=kCMNrS@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "RrCbVyZOlVRJXHjA"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=gKxXYb@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "TC6sKsPZlu9lUirf"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "rpnyyE@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "XNRFnwuWpSXZcm4g"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=asKBlD@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "g0eQGvZSyPIpIW6v"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=jIQIEH@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "ggSyCr6QNJfdeW06"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "GUqhyo@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "hUpnagEoUJ9AC8AU"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "qxbxqT@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "isW6G7xpHkdrDZGP"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "LxAmmE@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "jIHs6KmsXAQFH1Iz"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=IalJcv@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "kirASE70GK8kfFB2"
+        },
+        {
+            "nome": "Teste Usuário Comum",
+            "email": "usuarioteste@teste.com",
+            "password": "teste",
+            "administrador": "false",
+            "_id": "msKMX9frYyx7TeHh"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "BdtGGM@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "oGKejYiRWsgzGaxC"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "MnbOKH@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "osWcSaQLKCS0389O"
+        },
+        {
+            "nome": "Teste Usuário Adm",
+            "email": "usuarioadm@teste.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "pL0fqwXiXU5pwV7H"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "ENKxVv@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "qUcPZeGAlxZoKoCo"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=EjYJBa@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "rYFWjcyog2HOVfE9"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "email=unaMdd@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "s0mShP4FBTSKFLjj"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "gMQrAg@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "trbh76FvHJRmvv5x"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "bEadpM@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "y26PV5xmgStF3uU1"
+        },
+        {
+            "nome": "TesteRobot",
+            "email": "LiVGBd@email.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "ySYJxquJWD3CKSvA"
+        }
+    ]
+} 
+ </msg>
+<msg time="2025-09-10T16:57:39.489904" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.280830" elapsed="0.209074"/>
+</kw>
+<kw name="Get From List" owner="Collections">
+<msg time="2025-09-10T16:57:39.490906" level="INFO">${primeiro_usuario} = {'nome': 'TesteRobot', 'email': 'EUDcmo@email.com', 'password': '1234', 'administrador': 'true', '_id': '09HDCAl29yel8QMs'}</msg>
+<var>${primeiro_usuario}</var>
+<arg>${resp.json()['usuarios']}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.489904" elapsed="0.001002"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-09-10T16:57:39.490906" level="INFO">${user_id} = 09HDCAl29yel8QMs</msg>
+<var>${user_id}</var>
+<arg>${primeiro_usuario}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.490906" elapsed="0.000000"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:39.660561" level="INFO">GET Request : url=https://compassuol.serverest.dev/usuarios/09HDCAl29yel8QMs 
+ path_url=/usuarios/09HDCAl29yel8QMs 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-10T16:57:39.660561" level="INFO">GET Response : url=https://compassuol.serverest.dev/usuarios/09HDCAl29yel8QMs 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '944628fc1c648d7cd208a5654e3b5e52', 'date': 'Wed, 10 Sep 2025 19:57:39 GMT', 'server': 'Google Frontend', 'Content-Length': '145'} 
+ body={
+    "nome": "TesteRobot",
+    "email": "EUDcmo@email.com",
+    "password": "1234",
+    "administrador": "true",
+    "_id": "09HDCAl29yel8QMs"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:39.660561" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/usuarios/${user_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.490906" elapsed="0.169655"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.661561" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp.json()['_id']}</arg>
+<arg>${user_id}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.661561" elapsed="0.001000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:39.280830" elapsed="0.381731"/>
+</test>
+<test id="s1-t9" name="Buscar usuário por ID inválido" line="72">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:39.851266" level="INFO">GET Request : url=https://compassuol.serverest.dev/usuarios/idinvalido 
+ path_url=/usuarios/idinvalido 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-10T16:57:39.851266" level="INFO">GET Response : url=https://compassuol.serverest.dev/usuarios/idinvalido 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '5ffddd1362f79055d208a5654e3b53a8', 'date': 'Wed, 10 Sep 2025 19:57:39 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:39.851266" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/usuarios/idinvalido</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.662561" elapsed="0.188705"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.851266" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<msg time="2025-09-10T16:57:39.852268" level="FAIL">'{
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+}' does not contain 'não encontrado'</msg>
+<arg>${resp.text}</arg>
+<arg>não encontrado</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="FAIL" start="2025-09-10T16:57:39.852268" elapsed="0.000000">'{
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+}' does not contain 'não encontrado'</status>
+</kw>
+<status status="FAIL" start="2025-09-10T16:57:39.662561" elapsed="0.190705">'{
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+}' does not contain 'não encontrado'</status>
+</test>
+<test id="s1-t10" name="Listar produtos" line="78">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:40.037673" level="INFO">GET Request : url=https://compassuol.serverest.dev/produtos 
+ path_url=/produtos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-10T16:57:40.037673" level="INFO">GET Response : url=https://compassuol.serverest.dev/produtos 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'e8510b8e2e40d510d208a5654e3b54ba', 'date': 'Wed, 10 Sep 2025 19:57:39 GMT', 'server': 'Google Frontend', 'Content-Length': '435'} 
+ body={
+    "quantidade": 2,
+    "produtos": [
+        {
+            "nome": "Logitech MX Vertical",
+            "preco": 470,
+            "descricao": "Mouse",
+            "quantidade": 382,
+            "_id": "BeeJh5lz3k6kSIzA"
+        },
+        {
+            "nome": "Samsung 60 polegadas",
+            "preco": 5240,
+            "descricao": "TV",
+            "quantidade": 49977,
+            "_id": "K6leHdftCeOJj8BJ"
+        }
+    ]
+} 
+ </msg>
+<msg time="2025-09-10T16:57:40.037673" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/produtos</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:39.854268" elapsed="0.183405"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.038672" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${resp.json()}</arg>
+<arg>produtos</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.038672" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${resp.json()}</arg>
+<arg>quantidade</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.039673" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:39.853266" elapsed="0.186407"/>
+</test>
+<test id="s1-t11" name="Buscar produto por ID válido" line="84">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:40.231927" level="INFO">GET Request : url=https://compassuol.serverest.dev/produtos 
+ path_url=/produtos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-10T16:57:40.231927" level="INFO">GET Response : url=https://compassuol.serverest.dev/produtos 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'fe4f5c09caa84e35d208a5654e3b572b', 'date': 'Wed, 10 Sep 2025 19:57:40 GMT', 'server': 'Google Frontend', 'Content-Length': '435'} 
+ body={
+    "quantidade": 2,
+    "produtos": [
+        {
+            "nome": "Logitech MX Vertical",
+            "preco": 470,
+            "descricao": "Mouse",
+            "quantidade": 382,
+            "_id": "BeeJh5lz3k6kSIzA"
+        },
+        {
+            "nome": "Samsung 60 polegadas",
+            "preco": 5240,
+            "descricao": "TV",
+            "quantidade": 49977,
+            "_id": "K6leHdftCeOJj8BJ"
+        }
+    ]
+} 
+ </msg>
+<msg time="2025-09-10T16:57:40.231927" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/produtos</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.040672" elapsed="0.191255"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-09-10T16:57:40.232924" level="INFO">${produtos} = [{'nome': 'Logitech MX Vertical', 'preco': 470, 'descricao': 'Mouse', 'quantidade': 382, '_id': 'BeeJh5lz3k6kSIzA'}, {'nome': 'Samsung 60 polegadas', 'preco': 5240, 'descricao': 'TV', 'quantidade': 49...</msg>
+<var>${produtos}</var>
+<arg>${resp.json()}</arg>
+<arg>produtos</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.231927" elapsed="0.000997"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Buscar Primeiro Produto">
+<kw name="Get From List" owner="Collections">
+<msg time="2025-09-10T16:57:40.232924" level="INFO">${primeiro_produto} = {'nome': 'Logitech MX Vertical', 'preco': 470, 'descricao': 'Mouse', 'quantidade': 382, '_id': 'BeeJh5lz3k6kSIzA'}</msg>
+<var>${primeiro_produto}</var>
+<arg>${produtos}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.232924" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-09-10T16:57:40.233924" level="INFO">${produto_id} = BeeJh5lz3k6kSIzA</msg>
+<var>${produto_id}</var>
+<arg>${primeiro_produto}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.232924" elapsed="0.001000"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:40.401941" level="INFO">GET Request : url=https://compassuol.serverest.dev/produtos/BeeJh5lz3k6kSIzA 
+ path_url=/produtos/BeeJh5lz3k6kSIzA 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-10T16:57:40.401941" level="INFO">GET Response : url=https://compassuol.serverest.dev/produtos/BeeJh5lz3k6kSIzA 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '2868b6a82cc15273d208a5654e3b583d', 'date': 'Wed, 10 Sep 2025 19:57:40 GMT', 'server': 'Google Frontend', 'Content-Length': '136'} 
+ body={
+    "nome": "Logitech MX Vertical",
+    "preco": 470,
+    "descricao": "Mouse",
+    "quantidade": 382,
+    "_id": "BeeJh5lz3k6kSIzA"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:40.401941" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/produtos/${produto_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.233924" elapsed="0.168017"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.401941" elapsed="0.001001"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp.json()['_id']}</arg>
+<arg>${produto_id}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.402942" elapsed="0.000000"/>
+</kw>
+<arg>${produtos}</arg>
+<status status="PASS" start="2025-09-10T16:57:40.232924" elapsed="0.170018"/>
+</kw>
+<arg>${produtos}</arg>
+<arg>Buscar Primeiro Produto</arg>
+<arg>${produtos}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.232924" elapsed="0.170018"/>
+</kw>
+<status status="PASS" start="2025-09-10T16:57:40.039673" elapsed="0.363269"/>
+</test>
+<test id="s1-t12" name="Buscar produto por ID inválido" line="90">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-10T16:57:40.610708" level="INFO">GET Request : url=https://compassuol.serverest.dev/produtos/idinvalido 
+ path_url=/produtos/idinvalido 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-10T16:57:40.610708" level="INFO">GET Response : url=https://compassuol.serverest.dev/produtos/idinvalido 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'f84db0fb3b25d6bfd208a5654e3b5d45', 'date': 'Wed, 10 Sep 2025 19:57:40 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+} 
+ </msg>
+<msg time="2025-09-10T16:57:40.611708" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>serverest</arg>
+<arg>/produtos/idinvalido</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.403941" elapsed="0.207767"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-10T16:57:40.611708" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<msg time="2025-09-10T16:57:40.611708" level="FAIL">'{
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+}' does not contain 'não encontrado'</msg>
+<arg>${resp.text}</arg>
+<arg>não encontrado</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="FAIL" start="2025-09-10T16:57:40.611708" elapsed="0.001001">'{
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+}' does not contain 'não encontrado'</status>
+</kw>
+<status status="FAIL" start="2025-09-10T16:57:40.403941" elapsed="0.208768">'{
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+}' does not contain 'não encontrado'</status>
+</test>
+<status status="FAIL" start="2025-09-10T16:57:37.599111" elapsed="3.014597"/>
+</suite>
+<statistics>
+<total>
+<stat pass="10" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Serverest Tests" id="s1" pass="10" fail="2" skip="0">Serverest Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
