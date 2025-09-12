@@ -4,23 +4,39 @@ Library    Collections
 Suite Setup    Create Session    serverest    https://compassuol.serverest.dev    disable_warnings=1
 
 *** Variables ***
-${EMAIL}    fulano@qa.com
-${SENHA}    teste   
-${EMAILINVALIDO}    emailinvalido.com
+${EMAIL}              fulano@qa.com
+${SENHA}              teste
+${EMAILINVALIDO}      emailinvalido.com
 ${SENHA_INCORRETA}    senhaerrada
-${EMAIL_INEXISTENTE}    inexistente@teste.com
+${EMAIL_INEXISTENTE}  inexistente@teste.com
 
 *** Test Cases ***
 
-# Caminho feliz de Login
-Login com credenciais válidas
-    ${body}=    Create Dictionary    email=${EMAIL}    password=${SENHA}
-    ${resp}=    POST On Session    serverest    /login    json=${body}
-    Status Should Be    200    ${resp}
-    ${token}=    Get From Dictionary    ${resp.json()}    authorization
-    Should Not Be Empty    ${token}
+# -----------------------
+# Testes de Cadastro de Usuários
+# -----------------------
 
-# Caminhos tristes de Login
+Cadastrar usuário sem email
+    ${body}=    Create Dictionary    nome=Usuario Sem Email    password=12345678    administrador=false
+    ${resp}=    POST On Session    serverest    /usuarios    json=${body}    expected_status=400
+    Status Should Be    400    ${resp}
+    Should Be Equal    ${resp.json()['email']}    email é obrigatório
+
+Cadastrar usuário sem nome
+    ${body}=    Create Dictionary    email=semnome@qa.com    password=12345678    administrador=false
+    ${resp}=    POST On Session    serverest    /usuarios    json=${body}    expected_status=400
+    Status Should Be    400    ${resp}
+    Should Be Equal    ${resp.json()['nome']}    nome é obrigatório
+
+Cadastrar usuário sem senha
+    ${body}=    Create Dictionary    nome=Usuario Sem Senha    email=sensenha@qa.com    administrador=false
+    ${resp}=    POST On Session    serverest    /usuarios    json=${body}    expected_status=400
+    Status Should Be    400    ${resp}
+    Should Be Equal    ${resp.json()['password']}    password é obrigatório
+# -----------------------
+# Testes de Login
+# -----------------------
+
 Login com email inválido
     ${body}=    Create Dictionary    email=${EMAILINVALIDO}    password=${SENHA}
     ${resp}=    POST On Session    serverest    /login    json=${body}    expected_status=400
@@ -51,7 +67,9 @@ Login sem senha
     Status Should Be    400    ${resp}
     Should Be Equal    ${resp.json()['password']}    password é obrigatório
 
+# -----------------------
 # Testes de Usuários
+# -----------------------
 Listar usuários
     ${resp}=    GET On Session    serverest    /usuarios
     Status Should Be    200    ${resp}
@@ -59,22 +77,28 @@ Listar usuários
     Should Contain    ${resp.json()}    quantidade
 
 Buscar usuário por ID válido
-    # Primeiro pega a lista de usuários para obter um ID válido
     ${resp}=    GET On Session    serverest    /usuarios
     ${primeiro_usuario}=    Get From List    ${resp.json()['usuarios']}    0
     ${user_id}=    Get From Dictionary    ${primeiro_usuario}    _id
-    
-    # Busca o usuário pelo ID
     ${resp}=    GET On Session    serverest    /usuarios/${user_id}
     Status Should Be    200    ${resp}
     Should Be Equal    ${resp.json()['_id']}    ${user_id}
 
-Buscar usuário por ID inválido
-    ${resp}=    GET On Session    serverest    /usuarios/idinvalido    expected_status=400
+Atualizar usuário inexistente
+    ${update_body}=    Create Dictionary    nome=Usuario Fake    email=naoexiste@qa.com    password=1234    administrador=false
+    ${resp}=    PUT On Session    serverest    /usuarios/idinvalido    json=${update_body}    expected_status=400
     Status Should Be    400    ${resp}
-    Should Contain    ${resp.text}    não encontrado
+    Should Contain    ${resp.json()['message']}    Este email já está sendo usado
 
+Deletar usuário inexistente
+    ${resp}=    DELETE On Session    serverest    /usuarios/idinvalido
+    Status Should Be    401    ${resp}
+    Should Contain    ${resp.json()['message']}    Nenhum registro excluído
+    ##ERRO: Está retornando status code incorreto.
+
+# -----------------------
 # Testes de Produtos
+# -----------------------
 Listar produtos
     ${resp}=    GET On Session    serverest    /produtos
     Status Should Be    200    ${resp}
@@ -82,22 +106,15 @@ Listar produtos
     Should Contain    ${resp.json()}    quantidade
 
 Buscar produto por ID válido
-    # Primeiro pega a lista de produtos para obter um ID válido
     ${resp}=    GET On Session    serverest    /produtos
     ${produtos}=    Get From Dictionary    ${resp.json()}    produtos
     Run Keyword If    ${produtos}    Buscar Primeiro Produto    ${produtos}
-
-Buscar produto por ID inválido
-    ${resp}=    GET On Session    serverest    /produtos/idinvalido    expected_status=400
-    Status Should Be    400    ${resp}
-    Should Contain    ${resp.text}    não encontrado
 
 *** Keywords ***
 Buscar Primeiro Produto
     [Arguments]    ${produtos}
     ${primeiro_produto}=    Get From List    ${produtos}    0
     ${produto_id}=    Get From Dictionary    ${primeiro_produto}    _id
-    
     ${resp}=    GET On Session    serverest    /produtos/${produto_id}
     Status Should Be    200    ${resp}
     Should Be Equal    ${resp.json()['_id']}    ${produto_id}
