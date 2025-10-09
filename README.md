@@ -1,26 +1,18 @@
-# Repositório Individual - Programa de Bolsas Compass UOL [Ainda em atualização]
+# Challenge Final: CinemaAPP - Guia do Repositório.
 
-Meu nome é Kaio, e bem-vindo ao meu repositório! Aqui você encontrará os meus documentos da trilha, cada um organizado em **branches separadas** conforme solicitado no Learning. Cada branch contém um documento específico e pode ser acessada individualmente.
-
----
+Olá, sou o Kaio Leandro, e estou aqui para dar um norte referente aos arquivos do meu repositório, para um melhor auxílio na execução dos testes.
+<br>
 
 ## Estrutura do Repositório
 
-- **Branch principal (`main`)**: Contém este README explicando o repositório.
-- **Branches de documentos**:  
-  Cada documento está em uma branch separada. Para acessá-los:
-  1. Vá até a lista de branches no GitHub.  
-  2. Selecione a branch correspondente ao documento que deseja visualizar.
-  3. Lá você encontrará o conteúdo completo do documento.
-
-> **Dica:** Você também pode clonar o repositório e trocar de branch localmente usando:
->
-> ```bash
-> git checkout nome-da-branch
-> ```
+### **Dentro da pasta challengeFinal existem dois caminhos**:
+- A pasta **back**, referente aos testes de api.
+- A pasta **front**, referente aos testes de interface com a Browser.
+### Dentro de cada pasta, você encontrará dois caminhos:
+- Um deles é o repositório do cinemaApp, necessário para a conexão com a aplicação.
+- O outro é a pasta *tests*, que possuirá os arquivos de teste com o robot.
 
 ---
-
-### Quaisquer observações ou melhorias:
-
-Entre em contato comigo via os canais de comunicação oficiais da Compass.
+### IMPORTANTE: 
+Os caminhos dos repositórios da aplicação (back e front) **já possuem** READMEs muito explicativos definidos pelo instrutor Jacques sobre como realizar a execução e conexão da aplicação com o localhost.
+Vale ressaltar que as pastas com os arquivos de testes e seus endpoints e resources bem definidos **também possuem** READMEs feitos por mim, que explicam como realizar a execução dos testes para facilitar a sua vida.
