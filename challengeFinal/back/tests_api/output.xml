@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-10-08T16:37:18.433135" rpa="false" schemaversion="5">
+<suite id="s1" name="Movies Tests" source="c:\Users\kaiol\challengeFinal\back\tests_api\suites\movies_tests.robot">
+<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
+<msg time="2025-10-08T16:37:18.592328" level="INFO">Creating Session using : alias=cinema, url=http://localhost:3000/api/v1, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>cinema</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-10-08T16:37:18.590576" elapsed="0.003446"/>
+</kw>
+<test id="s1-t1" name="Obter Filme Por ID" line="19">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-08T16:37:18.595083" level="INFO">${movie_id} = 68e57737acee46196cffd70d</msg>
+<var>${movie_id}</var>
+<arg>68e57737acee46196cffd70d</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.594796" elapsed="0.000406"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-08T16:37:18.659093" level="INFO">GET Request : url=http://localhost:3000/api/v1/movies/68e57737acee46196cffd70d 
+ path_url=/api/v1/movies/68e57737acee46196cffd70d 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-08T16:37:18.659424" level="INFO">GET Response : url=http://localhost:3000/api/v1/movies/68e57737acee46196cffd70d 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '194505', 'ETag': 'W/"2f7c9-UL9L9k4Y99BahbfEEJErFurF+Vo"', 'Date': 'Wed, 08 Oct 2025 19:37:18 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"success":true,"data":{"_id":"68e57737acee46196cffd70d","customId":"2","title":"The Avengers","synopsis":"Earth's mightiest heroes must come together to save the world.","director":"Joss Whedon","genres":["Action","Adventure"],"duration":143,"classification":"PG-13","poster":"avengers.jpg","releaseDate":"2012-05-04T00:00:00.000Z","createdAt":"2025-10-07T20:25:27.571Z","__v":0,"updatedAt":"2025-10-07T20:25:27.572Z","sessions":[{"_id":"68e57737acee46196cffd71b","movie":"68e57737acee46196cffd70d","theater":"68e57737acee46196cffd710","datetime":"2025-10-07T15:00:00.000Z","fullPrice":15,"halfPrice":7.5,"seats":[{"row":"A","number":1,"status":"available"},{"row":"A","number":2,"status":"available"},{"row":"A","number":3,"status":"available"},{"row":"A","number":4,"status":"available"},{"row":"A","number":5,"status":"available"},{"row":"A","number":6,"status":"available"},{"row":"A","number":7,"status":"available"},{"row":"A","number":8,"status":"available"},{"row":"A","number":9,"status":"available"},{"row":"A","number":10,"status":"available"},{"row":"A","number":11,"status":"available"},{"row":"A","number":12,"status":"available"},{"row":"A","number":13,"status":"available"},{"row":"A","number":14,"status":"available"},{"row":"A","number":15,"status":"available"},{"row":"B","number":1,"status":"available"},{"row":"B","number":2,"status":"available"},{"row":"B","number":3,"status":"available"},{"row":"B","number":4,"status":"available"},{"row":"B","number":5,"status":"available"},{"row":"B","number":6,"status":"available"},{"row":"B","number":7,"status":"available"},{"row":"B","number":8,"status":"available"},{"row":"B","number":9,"status":"available"},{"row":"B","number":10,"status":"available"},{"row":"B","number":11,"status":"available"},{"row":"B","number":12,"status":"available"},{"row":"B","number":13,"status":"available"},{"row":"B","number":14,"status":"available"},{"row":"B","number":15,"status":"available"},{"row":"C","number":1,"status":"available"},{"row":"C","number":2,"status":"available"},{"row":"C","number":3,"status":"available"},{"row":"C","number":4,"status":"available"},{"row":"C","number":5,"status":"available"},{"row":"C","number":6,"status":"available"},{"row":"C","number":7,"status":"available"},{"row":"C","number":8,"status":"available"},{"row":"C","number":9,"status":"available"},{"row":"C","number":10,"status":"available"},{"row":"C","number":11,"status":"available"},{"row":"C","number":12,"status":"available"},{"row":"C","number":13,"status":"available"},{"row":"C","number":14,"status":"available"},{"row":"C","number":15,"status":"available"},{"row":"D","number":1,"status":"available"},{"row":"D","number":2,"status":"available"},{"row":"D","number":3,"status":"available"},{"row":"D","number":4,"status":"available"},{"row":"D","number":5,"status":"available"},{"row":"D","number":6,"status":"available"},{"row":"D","number":7,"status":"available"},{"row":"D","number":8,"status":"available"},{"row":"D","number":9,"status":"available"},{"row":"D","number":10,"status":"available"},{"row":"D","number":11,"status":"available"},{"row":"D","number":12,"status":"available"},{"row":"D","number":13,"status":"available"},{"row":"D","number":14,"status":"available"},{"row":"D","number":15,"status":"available"},{"row":"E","number":1,"status":"available"},{"row":"E","number":2,"status":"available"},{"row":"E","number":3,"status":"available"},{"row":"E","number":4,"status":"available"},{"row":"E","number":5,"status":"available"},{"row":"E","number":6,"status":"available"},{"row":"E","number":7,"status":"available"},{"row":"E","number":8,"status":"available"},{"row":"E","number":9,"status":"available"},{"row":"E","number":10,"status":"available"},{"row":"E","number":11,"status":"available"},{"row":"E","number":12,"status":"available"},{"row":"E","number":13,"status":"available"},{"row":"E","number":14,"status":"available"},{"row":"E","number":15,"status":"available"},{"row":"F","number":1,"status":"available"},{"row":"F","number":2,"status":"available"},{"row":"F","number":3,"status":"available"},{"row":"F","number":4,"status":"available"},{"row":"F","number":5,"status":"available"},{"row":"F","number":6,"status":"available"},{"row":"F","number":7,"status":"available"},{"row":"F","number":8,"status":"available"},{"row":"F","number":9,"status":"available"},{"row":"F","number":10,"status":"available"},{"row":"F","number":11,"status":"available"},{"row":"F","number":12,"status":"available"},{"row":"F","number":13,"status":"available"},{"row":"F","number":14,"status":"available"},{"row":"F","number":15,"status":"available"},{"row":"G","number":1,"status":"available"},{"row":"G","number":2,"status":"available"},{"row":"G","number":3,"status":"available"},{"row":"G","number":4,"status":"available"},{"row":"G","number":5,"status":"available"},{"row":"G","number":6,"status":"available"},{"row":"G","number":7,"status":"available"},{"row":"G","number":8,"status":"available"},{"row":"G","number":9,"status":"available"},{"row":"G","number":10,"status":"available"},{"row":"G","number":11,"status":"available"},{"row":"G","number":12,"status":"available"},{"row":"G","number":13,"status":"available"},{"row":"G","number":14,"status":"available"},{"row":"G","number":15,"status":"available"},{"row":"H","number":1,"status":"available"},{"row":"H","number":2,"status":"available"},{"row":"H","number":3,"status":"available"},{"row":"H","number":4,"status":"available"},{"row":"H","number":5,"status":"available"},{"row":"H","number":6,"status":"available"},{"row":"H","number":7,"status":"available"},{"row":"H","number":8,"status":"available"},{"row":"H","number":9,"status":"available"},{"row":"H","number":10,"status":"available"},{"row":"H","number":11,"status":"available"},{"row":"H","number":12,"status":"available"},{"row":"H","number":13,"status":"available"},{"row":"H","number":14,"status":"available"},{"row":"H","number":15,"status":"available"}],"createdAt":"2025-10-07T20:25:27.600Z","__v":0,"updatedAt":"2025-10-07T20:25:27.976Z","id":"68e57737acee46196cffd71b"},{"_id":"68e57737acee46196cffd71c","movie":"68e57737acee46196cffd70d","theater":"68e57737acee46196cffd710","datetime":"2025-10-07T19:00:00.000Z","fullPrice":15,"halfPrice":7.5,"seats":[{"row":"A","number":1,"status":"available"},{"row":"A","number":2,"status":"available"},{"row":"A","number":3,"status":"available"},{"row":"A","number":4,"status":"available"},{"row":"A","number":5,"status":"available"},{"row":"A","number":6,"status":"available"},{"row":"A","number":7,"status":"available"},{"row":"A","number":8,"status":"available"},{"row":"A","number":9,"status":"available"},{"row":"A","number":10,"status":"available"},{"row":"A","number":11,"status":"available"},{"row":"A","number":12,"status":"available"},{"row":"A","number":13,"status":"available"},{"row":"A","number":14,"status":"available"},{"row":"A","number":15,"status":"available"},{"row":"B","number":1,"status":"available"},{"row":"B","number":2,"status":"available"},{"row":"B","number":3,"status":"available"},{"row":"B","number":4,"status":"available"},{"row":"B","number":5,"status":"available"},{"row":"B","number":6,"status":"available"},{"row":"B","number":7,"status":"available"},{"row":"B","number":8,"status":"available"},{"row":"B","number":9,"status":"available"},{"row":"B","number":10,"status":"available"},{"row":"B","number":11,"status":"available"},{"row":"B","number":12,"status":"available"},{"row":"B","number":13,"status":"available"},{"row":"B","number":14,"status":"available"},{"row":"B","number":15,"status":"available"},{"row":"C","number":1,"status":"available"},{"row":"C","number":2,"status":"available"},{"row":"C","number":3,"status":"available"},{"row":"C","number":4,"status":"available"},{"row":"C","number":5,"status":"available"},{"row":"C","number":6,"status":"available"},{"row":"C","number":7,"status":"available"},{"row":"C","number":8,"status":"available"},{"row":"C","number":9,"status":"available"},{"row":"C","number":10,"status":"available"},{"row":"C","number":11,"status":"available"},{"row":"C","number":12,"status":"available"},{"row":"C","number":13,"status":"available"},{"row":"C","number":14,"status":"available"},{"row":"C","number":15,"status":"available"},{"row":"D","number":1,"status":"available"},{"row":"D","number":2,"status":"available"},{"row":"D","number":3,"status":"available"},{"row":"D","number":4,"status":"available"},{"row":"D","number":5,"status":"available"},{"row":"D","number":6,"status":"available"},{"row":"D","number":7,"status":"available"},{"row":"D","number":8,"status":"available"},{"row":"D","number":9,"status":"available"},{"row":"D","number":10,"status":"available"},{"row":"D","number":11,"status":"available"},{"row":"D","number":12,"status":"available"},{"row":"D","number":13,"status":"available"},{"row":"D","number":14,"status":"available"},{"row":"D","number":15,"status":"available"},{"row":"E","number":1,"status":"available"},{"row":"E","number":2,"status":"available"},{"row":"E","number":3,"status":"available"},{"row":"E","number":4,"status":"available"},{"row":"E","number":5,"status":"available"},{"row":"E","number":6,"status":"available"},{"row":"E","number":7,"status":"available"},{"row":"E","number":8,"status":"available"},{"row":"E","number":9,"status":"available"},{"row":"E","number":10,"status":"available"},{"row":"E","number":11,"status":"available"},{"row":"E","number":12,"status":"available"},{"row":"E","number":13,"status":"available"},{"row":"E","number":14,"status":"available"},{"row":"E","number":15,"status":"available"},{"row":"F","number":1,"status":"available"},{"row":"F","number":2,"status":"available"},{"row":"F","number":3,"status":"available"},{"row":"F","number":4,"status":"available"},{"row":"F","number":5,"status":"available"},{"row":"F","number":6,"status":"available"},{"row":"F","number":7,"status":"available"},{"row":"F","number":8,"status":"available"},{"row":"F","number":9,"status":"available"},{"row":"F","number":10,"sta... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg time="2025-10-08T16:37:18.659883" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>cinema</arg>
+<arg>${MOVIES}/${movie_id}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.595568" elapsed="0.064403"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-10-08T16:37:18.660963" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.660396" elapsed="0.000701"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-08T16:37:18.665733" level="INFO">${data} = {'_id': '68e57737acee46196cffd70d', 'customId': '2', 'title': 'The Avengers', 'synopsis': "Earth's mightiest heroes must come together to save the world.", 'director': 'Joss Whedon', 'genres': ['Actio...</msg>
+<var>${data}</var>
+<arg>${response.json()['data']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.661482" elapsed="0.004348"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${data['_id']}</arg>
+<arg>${movie_id}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.666150" elapsed="0.000569"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-10-08T16:37:18.667543" level="INFO">Length is 12.</msg>
+<arg>${data['title']}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.667043" elapsed="0.000621"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-10-08T16:37:18.668536" level="INFO">Length is 11.</msg>
+<arg>${data['director']}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.668023" elapsed="0.000642"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-10-08T16:37:18.669406" level="INFO">Length is 2.</msg>
+<arg>${data['genres']}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.668957" elapsed="0.000564"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-10-08T16:37:18.670187" level="INFO">Length is 24.</msg>
+<arg>${data['releaseDate']}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.669837" elapsed="0.000446"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Filme obtido com sucesso: ${data['title']} (${data['customId']})</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-10-08T16:37:18.670676" elapsed="0.000728"/>
+</kw>
+<doc>Obtém os detalhes de um filme específico pelo ID</doc>
+<status status="PASS" start="2025-10-08T16:37:18.594250" elapsed="0.077448"/>
+</test>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2025-10-08T16:37:18.673025" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-10-08T16:37:18.672834" elapsed="0.000401"/>
+</kw>
+<doc>Testes de CRUD de filmes do Cinema APP (sem autenticação de admin)</doc>
+<status status="PASS" start="2025-10-08T16:37:18.439077" elapsed="0.234275"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Movies Tests" id="s1" pass="1" fail="0" skip="0">Movies Tests</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-10-08T16:37:18.581099" level="ERROR">Error in file 'c:\Users\kaiol\challengeFinal\back\tests_api\resources\endpoints.resource' on line 10: Setting variable '${MOVIE_ID}' failed: Variable '${id}' not found.</msg>
+<msg time="2025-10-08T16:37:18.584056" level="ERROR">Error in file 'c:\Users\kaiol\challengeFinal\back\tests_api\resources\endpoints.resource' on line 15: Setting variable '${RESERVATION_ID}' failed: Variable '${id}' not found.</msg>
+<msg time="2025-10-08T16:37:18.585048" level="ERROR">Error in file 'c:\Users\kaiol\challengeFinal\back\tests_api\resources\endpoints.resource' on line 20: Setting variable '${RESET_SEATS}' failed: Variable '${id}' not found.</msg>
+<msg time="2025-10-08T16:37:18.586047" level="ERROR">Error in file 'c:\Users\kaiol\challengeFinal\back\tests_api\resources\endpoints.resource' on line 19: Setting variable '${SESSION_ID}' failed: Variable '${id}' not found.</msg>
+<msg time="2025-10-08T16:37:18.587030" level="ERROR">Error in file 'c:\Users\kaiol\challengeFinal\back\tests_api\resources\endpoints.resource' on line 28: Setting variable '${THEATER_ID}' failed: Variable '${id}' not found.</msg>
+<msg time="2025-10-08T16:37:18.587966" level="ERROR">Error in file 'c:\Users\kaiol\challengeFinal\back\tests_api\resources\endpoints.resource' on line 32: Setting variable '${USER_ID}' failed: Variable '${id}' not found.</msg>
+</errors>
+</robot>
