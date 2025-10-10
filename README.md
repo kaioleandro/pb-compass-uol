@@ -12,6 +12,7 @@ Olá, sou o Kaio Leandro, e estou aqui para dar um norte referente aos arquivos 
 - Um deles é o repositório do cinemaApp, necessário para a conexão com a aplicação.
 - O outro é a pasta *tests*, que possuirá os arquivos de teste com o robot.
 
+### Além disso, também existe um arquivo PDF com planejamento de testes.
 ---
 ### IMPORTANTE: 
 Os caminhos dos repositórios da aplicação (back e front) **já possuem** READMEs muito explicativos definidos pelo instrutor Jacques sobre como realizar a execução e conexão da aplicação com o localhost.
