@@ -37,11 +37,11 @@ Teste ponta-a-ponta de realizar uma reserva no cinema.
     Sleep    4s
     Click    a.btn.btn-primary.session-button[href="/sessions/68e57738d41f32edaaa5d183"]
     Sleep    4s
-    Click    button[title="Fileira B, Assento 6 - Status: available"]
+    Click    button[title="Fileira F, Assento 6 - Status: available"]
     Sleep    1s
-    Click    button[title="Fileira B, Assento 7 - Status: available"]
+    Click    button[title="Fileira F, Assento 7 - Status: available"]
     Sleep    1s
-    Click    button[title="Fileira B, Assento 8 - Status: available"]
+    Click    button[title="Fileira F, Assento 8 - Status: available"]
     Sleep    2s
     Click    text="Continuar para Pagamento"
     Sleep    2s
@@ -66,4 +66,5 @@ Limpar todos os bancos selecionados.
     Click    text="Ver Detalhes"
     Sleep    4s
     Click    a.btn.btn-primary.session-button[href="/sessions/68e57738d41f32edaaa5d183"]
+
     Click    button.reset-seats-btn
